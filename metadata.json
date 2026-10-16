@@ -1,0 +1,6 @@
+{
+  "name": "MedPulse Hospital Management System",
+  "description": "Production-ready hospital patient record management system featuring role-based portals for patients, doctors, and administrators with appointment booking, medical records, and digital prescription workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
