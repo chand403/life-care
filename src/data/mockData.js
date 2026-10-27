@@ -57,7 +57,7 @@ export const INITIAL_DOCTORS = [
     qualification: 'MD, FACP, FCCP, Board Certified Specialist (20+ Years Clinical Mastery)',
     experience: 20,
     bio: 'Dr. Chandna is the Chief Medical Director and Senior Attending Physician at LifeCare Hospital. With over 20 years of clinical mastery, Dr. Chandna oversees comprehensive patient consultations, cardiovascular therapeutics, acute chronic care management, and post-surgical patient rehabilitation.',
-    profileImage: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80',
+    profileImage: 'https://res.cloudinary.com/hdbfsq9s/image/upload/v1793076585/indian-medical-lady-doctor-using-laptop-in-clinic-KX39P4.jpg',
     consultationFee: 120,
     languages: ['English', 'Hindi', 'Spanish'],
     expertise: [

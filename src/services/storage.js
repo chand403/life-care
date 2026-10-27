@@ -78,37 +78,15 @@ export class HospitalStorageService {
   }
 
   login(email, password) {
-    const normalizedEmail = email.toLowerCase().trim();
-
-    // Check combined Dr. Chandna / Admin credentials
-    const isStaffEmail =
-      normalizedEmail === 'admin@lifecare.org' ||
-      normalizedEmail === 'dr.chandna@lifecare.org' ||
-      normalizedEmail === 'admin@medpulse.org' ||
-      normalizedEmail === 'dr.jenkins@medpulse.org';
-
-    let user;
-    if (isStaffEmail) {
-      user = this.users.find(
-        (u) => u.email === 'admin@lifecare.org' || u.role === 'admin'
-      ) || INITIAL_USERS[0];
-    } else {
-      user = this.users.find(
-        (u) => u.email.toLowerCase() === normalizedEmail
-      );
-    }
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    const user = this.users.find(
+      (item) => String(item.email || '').trim().toLowerCase() === normalizedEmail
+    );
 
     if (!user) {
       throw new Error('No account found with this email address.');
     }
-    if (
-      user.password !== password &&
-      password !== 'demo' &&
-      password !== 'admin123' &&
-      password !== 'doctor123' &&
-      password !== 'patient123' &&
-      password !== 'lifecare123'
-    ) {
+    if (user.password !== password) {
       throw new Error('Invalid password credentials.');
     }
     if (!user.isActive) {
@@ -142,11 +120,18 @@ export class HospitalStorageService {
   }
 
   registerPatient(patientData) {
+    const normalizedEmail = String(patientData.email || '').trim().toLowerCase();
     const existing = this.users.find(
-      (u) => u.email.toLowerCase() === patientData.email.toLowerCase().trim()
+      (user) => String(user.email || '').trim().toLowerCase() === normalizedEmail
     );
     if (existing) {
       throw new Error('An account with this email already exists.');
+    }
+    if (!normalizedEmail) {
+      throw new Error('Email address is required.');
+    }
+    if (!patientData.password) {
+      throw new Error('Password is required.');
     }
 
     const patientId = generatePatientId();
@@ -156,7 +141,7 @@ export class HospitalStorageService {
       _id: userId,
       patientId,
       name: patientData.name,
-      email: patientData.email,
+      email: normalizedEmail,
       password: patientData.password || 'patient123',
       role: 'patient',
       avatar:
@@ -171,7 +156,7 @@ export class HospitalStorageService {
       userId,
       patientId,
       name: patientData.name,
-      email: patientData.email,
+      email: normalizedEmail,
       dateOfBirth: patientData.dateOfBirth,
       gender: patientData.gender,
       bloodGroup: patientData.bloodGroup,
@@ -221,7 +206,7 @@ export class HospitalStorageService {
       action: 'PATIENT_REGISTERED',
       resource: 'Patient',
       resourceId: patientId,
-      metadata: { email: patientData.email },
+      metadata: { email: normalizedEmail },
     });
 
     this.addNotification({

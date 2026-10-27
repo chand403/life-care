@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Lock,
   Mail,
@@ -7,7 +7,7 @@ import {
   User,
   AlertCircle,
   Stethoscope,
-  Sparkles,
+  X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { LifeCareLogo } from '../../components/ui/LifeCareLogo.jsx';
@@ -20,6 +20,18 @@ export function LoginPage({ onNavigate }) {
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showDemoAccess, setShowDemoAccess] = useState(false);
+
+  useEffect(() => {
+    if (!showDemoAccess) return undefined;
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setShowDemoAccess(false);
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [showDemoAccess]);
 
   const handleTabSwitch = (tab) => {
     setActiveTab(tab);
@@ -55,12 +67,14 @@ export function LoginPage({ onNavigate }) {
 
   const handleFastStaffLogin = () => {
     setError('');
+    setShowDemoAccess(false);
     loginAsDemo('admin');
     onNavigate('/admin/dashboard');
   };
 
   const handleFastPatientLogin = () => {
     setError('');
+    setShowDemoAccess(false);
     loginAsDemo('patient');
     onNavigate('/patient/dashboard');
   };
@@ -109,43 +123,14 @@ export function LoginPage({ onNavigate }) {
           </button>
         </div>
 
-        {/* 1-Click Instant Demo Access Box */}
-        <div className="p-4 bg-rose-50/60 rounded-2xl border border-rose-200/80 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-800 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-rose-600" />
-              1-Click Fast Demonstration Access
-            </span>
-            <span className="text-[10px] font-medium text-rose-600">No typing needed</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={handleFastStaffLogin}
-              className="py-2.5 px-3 text-xs font-bold text-rose-900 bg-white hover:bg-rose-100/70 border border-rose-200 rounded-xl transition-all flex flex-col items-center gap-1 text-center shadow-2xs group"
-            >
-              <div className="flex items-center gap-1 text-rose-600">
-                <Stethoscope className="w-4 h-4" />
-                <ShieldCheck className="w-4 h-4" />
-              </div>
-              <span className="leading-tight font-extrabold text-slate-900 group-hover:text-rose-700">
-                Dr. Chandna
-              </span>
-              <span className="text-[10px] text-rose-600 font-medium">Doctor & Admin Staff</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleFastPatientLogin}
-              className="py-2.5 px-3 text-xs font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl transition-all flex flex-col items-center gap-1 text-center shadow-2xs group"
-            >
-              <User className="w-4 h-4 text-slate-600 group-hover:text-rose-600" />
-              <span className="leading-tight font-bold text-slate-900">James Wilson</span>
-              <span className="text-[10px] text-slate-500 font-medium">Verified Patient</span>
-            </button>
-          </div>
-        </div>
+        <button
+          type="button"
+          onClick={() => setShowDemoAccess(true)}
+          className="mx-auto inline-flex items-center gap-2 rounded-lg border border-rose-200 bg-white px-4 py-2 text-xs font-semibold text-rose-800 transition-colors hover:bg-rose-50"
+        >
+          <Stethoscope className="h-4 w-4" />
+          Demo Access
+        </button>
 
         {/* Standard Login Form */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-5">
@@ -253,6 +238,75 @@ export function LoginPage({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      {showDemoAccess && (
+        <div className="fixed inset-0 z-[70] bg-slate-950/40 backdrop-blur-[2px]">
+          <button
+            type="button"
+            aria-label="Close demo access panel"
+            onClick={() => setShowDemoAccess(false)}
+            className="absolute inset-0 h-full w-full cursor-default"
+          />
+          <aside
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-access-title"
+            className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-slate-200 bg-white shadow-2xl"
+          >
+            <div className="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-rose-700">
+                  Demo Accounts
+                </p>
+                <h2 id="demo-access-title" className="mt-1 text-lg font-bold text-slate-900">
+                  1-Click Fast Demonstration Access
+                </h2>
+                <p className="mt-1 text-xs text-slate-500">No typing needed</p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close demo access"
+                onClick={() => setShowDemoAccess(false)}
+                className="rounded-md p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="space-y-3 p-6">
+              <button
+                type="button"
+                onClick={handleFastStaffLogin}
+                className="flex w-full items-center gap-4 rounded-lg border border-rose-200 p-4 text-left transition-colors hover:bg-rose-50"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-rose-100 text-rose-700">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-sm font-bold text-slate-900">Dr. Chandna</span>
+                  <span className="mt-0.5 block text-xs text-slate-600">Doctor &amp; Admin Staff</span>
+                </span>
+                <ArrowRight className="ml-auto h-4 w-4 text-rose-700" />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleFastPatientLogin}
+                className="flex w-full items-center gap-4 rounded-lg border border-slate-200 p-4 text-left transition-colors hover:bg-slate-50"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
+                  <User className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-sm font-bold text-slate-900">James Wilson</span>
+                  <span className="mt-0.5 block text-xs text-slate-600">Verified Patient</span>
+                </span>
+                <ArrowRight className="ml-auto h-4 w-4 text-slate-500" />
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
     </div>
   );
 }

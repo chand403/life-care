@@ -10,8 +10,9 @@ export function PublicNavbar({ currentRoute, onNavigate }) {
   const navLinks = [
     { label: 'Home', route: '/' },
     { label: 'Patient Gallery', route: '/gallery' },
-    { label: 'Dr. Chandna', route: '/doctors/DOC-CHANDNA' },
-    { label: 'About LifeCare', route: '/about' },
+    { label: 'About Project', route: '/about' },
+        { label: 'Login', route: '/doctors/DOC-CHANDNA' },
+
   ];
 
   return (

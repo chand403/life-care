@@ -1,115 +1,129 @@
 import React from 'react';
 import {
-  Activity,
-  Award,
-  ShieldCheck,
-  Heart,
-  Users,
-  Building,
+  BookOpen,
   CheckCircle2,
-  Image as ImageIcon,
+  ClipboardList,
+  GraduationCap,
+  Lightbulb,
+  Target,
 } from 'lucide-react';
-import { LifeCareLogo } from '../../components/ui/LifeCareLogo.jsx';
 
-export function AboutPage({ onNavigate }) {
+const studentDetails = [
+  ['Student Name', 'Chandna'],
+  ['Class / Course', 'B.tech cse'],
+  ['Roll Number', '2428816'],
+  ['Semester', '7th'],
+  ['College / Institute', 'Doaba Group of Colleges Rahon Distt Nawanshahr '],
+  ['Project Guide', 'Manoj Barhpagga'],
+];
+
+const projectModules = [
+  'Patient profiles and medical history',
+  'Appointment booking and schedule management',
+  'Consultation reports and prescriptions',
+  'Role-based patient, doctor, and staff dashboards',
+  'Notifications, activity history, and gallery records',
+];
+
+export function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* Header */}
-      <div className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="flex justify-center mb-2">
-          <LifeCareLogo size={42} showText={true} />
-        </div>
-        <span className="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-3 py-1 rounded-full">
-          About Our Healthcare Institution
+    <div className="mx-auto max-w-5xl space-y-12 px-4 py-12 sm:px-6 lg:px-8">
+      <header className="max-w-3xl space-y-4">
+        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-700">
+          <GraduationCap className="h-4 w-4" />
+          College Project
         </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-          LifeCare Hospital & Medical Center
+        <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          LifeCare Hospital Management System
         </h1>
-        <p className="text-sm text-slate-600 leading-relaxed">
-          Under the clinical direction of Chief Medical Specialist <strong>Dr. Chandna</strong>, LifeCare Hospital delivers tertiary level clinical interventions, chronic care management, and transparent digital record security.
+        <p className="max-w-2xl text-sm leading-6 text-slate-600">
+          A student project demonstrating how patient records, appointments, and
+          clinical reports can be organized in one straightforward web application.
         </p>
-      </div>
+      </header>
 
-      {/* Hospital Pillars */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-2xl border border-rose-100 p-6 shadow-xs space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 flex items-center justify-center font-bold">
-            <Award className="w-5 h-5" />
+      <section aria-labelledby="student-details-heading" className="border-y border-slate-200 py-7">
+        <div className="mb-5 flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-rose-50 text-rose-700">
+            <GraduationCap className="h-5 w-5" />
           </div>
-          <h3 className="text-base font-bold text-slate-900">JCI & HIPAA Certified</h3>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Accredited by the Joint Commission International for the highest quality standards, sterile clinical protocols, and patient safety systems.
+          <div>
+            <h2 id="student-details-heading" className="text-lg font-bold text-slate-900">
+              Student Details
+            </h2>
+            <p className="text-xs text-slate-500">Replace the prompts with your submission details.</p>
+          </div>
+        </div>
+        <dl className="grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          {studentDetails.map(([label, value]) => (
+            <div key={label} className="border-t border-slate-100 py-3">
+              <dt className="text-xs font-medium text-slate-500">{label}</dt>
+              <dd className="mt-1 text-sm font-semibold text-slate-900">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="grid gap-10 md:grid-cols-2">
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-rose-700">
+            <BookOpen className="h-5 w-5" />
+            <h2 className="text-lg font-bold text-slate-900">Problem Statement</h2>
+          </div>
+          <p className="text-sm leading-6 text-slate-600">
+            Patient information, appointment schedules, and consultation notes can
+            become difficult to track when maintained in separate registers or files.
+            This can lead to duplicated work, delayed follow-ups, and incomplete records.
           </p>
         </div>
-
-        <div className="bg-white rounded-2xl border border-rose-100 p-6 shadow-xs space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 flex items-center justify-center font-bold">
-            <ImageIcon className="w-5 h-5" />
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-rose-700">
+            <Lightbulb className="h-5 w-5" />
+            <h2 className="text-lg font-bold text-slate-900">Proposed Solution</h2>
           </div>
-          <h3 className="text-base font-bold text-slate-900">Documented Recovery Milestones</h3>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Our Patient Photo Recovery Gallery documents real clinical milestones, spirometry normalization, and joint rehabilitation progress under Dr. Chandna.
+          <p className="text-sm leading-6 text-slate-600">
+            LifeCare brings the core workflows into a single interface. Patients can
+            review their appointments and reports, while staff can manage patient
+            records, schedules, prescriptions, and follow-up notifications.
           </p>
         </div>
+      </section>
 
-        <div className="bg-white rounded-2xl border border-rose-100 p-6 shadow-xs space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 flex items-center justify-center font-bold">
-            <ShieldCheck className="w-5 h-5" />
+      <section className="grid gap-10 border-t border-slate-200 pt-8 md:grid-cols-2">
+        <div>
+          <div className="mb-4 flex items-center gap-2">
+            <Target className="h-5 w-5 text-rose-700" />
+            <h2 className="text-lg font-bold text-slate-900">Project Objectives</h2>
           </div>
-          <h3 className="text-base font-bold text-slate-900">Zero-Compromise Security</h3>
-          <p className="text-xs text-slate-600 leading-relaxed">
-            Granular role-based authorization ensuring patients cannot alter physician prescriptions, and medical records are locked by strict identity validation.
-          </p>
+          <ul className="space-y-3">
+            {[
+              'Keep patient and appointment information organized.',
+              'Make reports and prescription details easy to review.',
+              'Provide separate views for patients and hospital staff.',
+              'Demonstrate common workflows with sample data.',
+            ].map((objective) => (
+              <li key={objective} className="flex items-start gap-2 text-sm leading-5 text-slate-600">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" />
+                {objective}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      {/* Clinical Leadership & Statistics */}
-      <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-rose-900/40">
-        <div className="space-y-4">
-          <span className="text-xs uppercase font-bold text-rose-400 tracking-wider">
-            Clinical Leadership
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-            Led by Dr. Chandna, Chief Medical Director
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Dr. Chandna brings over 20 years of clinical mastery in internal medicine, cardiovascular diagnostics, and post-surgical rehabilitation, personally directing outpatient care and patient recovery workflows.
-          </p>
-          <div className="pt-2 flex gap-3">
-            <button
-              onClick={() => onNavigate('/doctors/DOC-CHANDNA')}
-              className="px-5 py-2.5 text-xs font-bold text-slate-900 bg-white hover:bg-rose-50 rounded-xl shadow-xs transition-colors"
-            >
-              Dr. Chandna's Profile
-            </button>
-            <button
-              onClick={() => onNavigate('/gallery')}
-              className="px-5 py-2.5 text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 rounded-xl shadow-xs transition-colors"
-            >
-              View Recovery Gallery
-            </button>
+        <div>
+          <div className="mb-4 flex items-center gap-2">
+            <ClipboardList className="h-5 w-5 text-rose-700" />
+            <h2 className="text-lg font-bold text-slate-900">Project Modules</h2>
           </div>
+          <ul className="divide-y divide-slate-100">
+            {projectModules.map((module, index) => (
+              <li key={module} className="flex gap-3 py-2.5 text-sm text-slate-600">
+                <span className="font-mono text-xs font-bold text-rose-700">0{index + 1}</span>
+                {module}
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
-            <span className="text-3xl font-extrabold text-rose-400 tabular-nums">20+ Yrs</span>
-            <span className="text-xs text-slate-300 block mt-1">Clinical Practice</span>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
-            <span className="text-3xl font-extrabold text-rose-400 tabular-nums">99.8%</span>
-            <span className="text-xs text-slate-300 block mt-1">Diagnostic Accuracy</span>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
-            <span className="text-3xl font-extrabold text-rose-400 tabular-nums">24 / 7</span>
-            <span className="text-xs text-slate-300 block mt-1">Trauma & Emergency Unit</span>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
-            <span className="text-3xl font-extrabold text-rose-400 tabular-nums">100%</span>
-            <span className="text-xs text-slate-300 block mt-1">Encrypted Record Privacy</span>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }

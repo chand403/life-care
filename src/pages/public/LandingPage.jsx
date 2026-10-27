@@ -42,7 +42,7 @@ export function LandingPage({ onNavigate }) {
     qualification: 'MD, FACP, FCCP, Board Certified Specialist',
     experience: 20,
     bio: 'Dr. Chandna is the Chief Medical Director and Senior Attending Physician at LifeCare Hospital. With over 20 years of clinical mastery, Dr. Chandna oversees comprehensive patient consultations, cardiovascular therapeutics, acute chronic care management, and post-surgical patient rehabilitation.',
-    profileImage: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80',
+    profileImage: 'https://res.cloudinary.com/hdbfsq9s/image/upload/v1793076585/indian-medical-lady-doctor-using-laptop-in-clinic-KX39P4.jpg',
     consultationFee: 120,
     rating: 4.98,
   };
@@ -201,7 +201,7 @@ export function LandingPage({ onNavigate }) {
                 <div className="p-4 bg-rose-50/70 border border-rose-200/80 rounded-2xl space-y-2.5">
                   <div className="flex items-center gap-3">
                     <img
-                      src={chiefDoctor.profileImage}
+                      src="https://res.cloudinary.com/hdbfsq9s/image/upload/v1793076585/indian-medical-lady-doctor-using-laptop-in-clinic-KX39P4.jpg"
                       alt="Dr. Chandna"
                       className="w-12 h-12 rounded-xl object-cover border-2 border-rose-500 shadow-2xs"
                     />
@@ -353,7 +353,7 @@ export function LandingPage({ onNavigate }) {
             <div className="lg:col-span-4">
               <div className="relative max-w-sm mx-auto">
                 <img
-                  src={chiefDoctor.profileImage}
+                  src="https://res.cloudinary.com/hdbfsq9s/image/upload/v1793076585/indian-medical-lady-doctor-using-laptop-in-clinic-KX39P4.jpg"
                   alt={chiefDoctor.name}
                   className="w-full h-80 object-cover rounded-2xl border-4 border-white shadow-xl"
                   referrerPolicy="no-referrer"
